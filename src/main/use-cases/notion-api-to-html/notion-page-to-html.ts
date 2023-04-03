@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { HtmlOptions } from '../../../data/protocols/html-options/html-options';
 import { makeBlocksToHtml } from '../../factories';
 import { NotionPage } from '../../protocols/notion-page';

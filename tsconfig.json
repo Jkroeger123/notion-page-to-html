@@ -4,13 +4,11 @@
     "outDir": "dist",
     "sourceMap": true,
     "declaration": true,
-    "target": "es5",
+    "target": "ES2015",
     "module": "commonjs",
     "esModuleInterop": true,
     "strict": true,
-    "rootDirs": ["src",
-      "src/__tests__"
-    ],
+    "rootDirs": ["src", "src/__tests__"],
     "allowJs": true,
     "lib": ["es2019"]
   },
