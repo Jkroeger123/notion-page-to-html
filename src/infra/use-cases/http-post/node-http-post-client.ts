@@ -3,7 +3,6 @@ import https, { RequestOptions } from 'https';
 import { URL } from 'url';
 
 export class NodeHttpPostClient implements HttpPostClient {
-
   private _access_token: string;
 
   constructor(access_token: string) {
@@ -14,6 +13,8 @@ export class NodeHttpPostClient implements HttpPostClient {
     const urlHandler = new URL(url);
     const stringifiedBody = JSON.stringify(body);
 
+    console.log(this._access_token);
+
     const options: RequestOptions = {
       hostname: urlHandler.hostname,
       path: urlHandler.pathname,
@@ -21,7 +22,7 @@ export class NodeHttpPostClient implements HttpPostClient {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': stringifiedBody.length,
-        'Authorization': `Bearer ${this._access_token}`
+        Authorization: `Bearer ${this._access_token}`,
       },
     };
 
