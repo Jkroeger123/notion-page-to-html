@@ -1,9 +1,8 @@
-import { PageBlockToPageProps } from '../../../data/use-cases/page-block-to-page-props';
 import { HtmlOptions } from '../../../data/protocols/html-options/html-options';
-import { OptionsHtmlWrapper } from '../../../data/use-cases/html-wrapper/options-html-wrapper';
-import { NotionApiContentResponsesToBlocks } from '../../../infra/use-cases/to-blocks/notion-api-content-response-to-blocks';
-import { createNotionUrlToPageId, createNotionApiPageFetcher, makeBlocksToHtml } from '../../factories';
+import { makeBlocksToHtml } from '../../factories';
 import { NotionPage } from '../../protocols/notion-page';
+import { Client } from '@notionhq/client';
+import { getAllBlocksInPage } from './NotionPageReader';
 
 /**
  * @class NotionPageToHtml
@@ -32,20 +31,18 @@ export class NotionPageToHtml {
    * @throws If the url is invalid, it will throw an error.
    */
   static async convert(pageId: string, access_token: string, htmlOptions: HtmlOptions = {}): Promise<NotionPage> {
-    const fetcher = await createNotionApiPageFetcher(pageId, access_token);
-    const notionApiResponses = await fetcher.getNotionPageContents();
-    const blocks = new NotionApiContentResponsesToBlocks(notionApiResponses).toBlocks();
+    const notion = new Client({
+      auth: access_token,
+    });
+
+    const blocks = await getAllBlocksInPage(notion, pageId);
 
     if (blocks.length === 0) return Promise.resolve({ html: '' });
 
     const htmlBody = await makeBlocksToHtml(blocks).convert();
-    const pageProps = await new PageBlockToPageProps(blocks[0]).toPageProps();
 
     return {
-      title: pageProps.title,
-      ...(pageProps.icon && { icon: pageProps.icon }),
-      ...(pageProps.coverImageSrc && { cover: pageProps.coverImageSrc }),
-      html: new OptionsHtmlWrapper(htmlOptions).wrapHtml(pageProps, htmlBody),
+      html: htmlBody,
     };
   }
 }
