@@ -3,7 +3,7 @@ import { Decorator } from '../use-cases/blocks-to-html-converter/block-parsers/d
 import { replaceLineBreakByBrTag } from './replace-line-break-to-br-tag';
 
 export const blockToInnerHtml = async (block: Block): Promise<string> => {
-  const decorator = new Decorator(block.paragraph.rich_text || ([] as DecorableText[]));
+  const decorator = new Decorator(block[block.type].rich_text || ([] as DecorableText[]));
   const decoratedText = await decorator.decorate();
   return Promise.resolve(replaceLineBreakByBrTag(decoratedText));
 };

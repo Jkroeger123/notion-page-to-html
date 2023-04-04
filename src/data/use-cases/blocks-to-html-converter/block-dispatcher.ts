@@ -21,7 +21,6 @@ const fromBlockToHtmlConverter: Record<string, ToHtmlClass> = {
   equation: blockParsers.EquationBlockToHtml,
   quote: blockParsers.QuoteBlockToHtml,
   divider: blockParsers.DividerBlockToHtml,
-  bulleted_list_item: blockParsers.ListBlockToHtml,
   list: blockParsers.ListBlockToHtml,
   video: blockParsers.YouTubeVideoBlockToHtml,
   image: blockParsers.ImageBlockToHtml,

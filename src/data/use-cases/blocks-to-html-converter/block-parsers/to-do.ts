@@ -12,11 +12,11 @@ export class ToDoBlockToHtml implements ToHtml {
   }
 
   async convert(): Promise<string> {
-    const style = new FormatToStyle(this._block.format).toStyle();
+    //const style = new FormatToStyle(this._block.format).toStyle();
     const childrenHtml = await indentBlocksToHtml(this._block.children);
 
     return Promise.resolve(`\
-<ul class="to-do-list"${style}>
+<ul class="to-do-list">
 <li>
 <div class="checkbox checkbox-${this._isChecked() ? 'on' : 'off'}"></div>
 <span class="to-do-children-${this._isChecked() ? 'checked' : 'unchecked'}">${await blockToInnerHtml(
