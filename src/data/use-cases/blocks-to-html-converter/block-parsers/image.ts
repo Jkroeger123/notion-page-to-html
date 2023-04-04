@@ -15,21 +15,21 @@ export class ImageBlockToHtml implements ToHtml {
 
     const imageSource = await Base64Converter.convert(this._rawSrc);
     const caption = this._caption;
-    const style = new FormatToStyle(this._block.format).toStyle();
+    //const style = new FormatToStyle(this._block.format).toStyle();
 
     return `
 <figure class="image">
-<img src="${imageSource}" alt="${caption}"${style}>
+<img src="${imageSource}" alt="${caption}">
 ${caption !== '' ? `<figcaption>${caption}</figcaption>` : ''}
 </figure>
     `;
   }
 
   private get _rawSrc() {
-    const url = this._block.properties.source;
+    const url = this._block.image[this._block.image.type].url;
     if (!url) return;
 
-    return `https://www.notion.so/image/${encodeURIComponent(url)}?table=block&id=${this._block.id}`;
+    return url;
   }
 
   private get _caption() {

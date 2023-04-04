@@ -10,8 +10,10 @@ export class BlockDispatcher {
 }
 
 const fromBlockToHtmlConverter: Record<string, ToHtmlClass> = {
-  text: blockParsers.TextBlockToHtml,
-  header: blockParsers.HeaderBlockToHtml,
+  paragraph: blockParsers.TextBlockToHtml,
+  heading_1: blockParsers.HeaderBlockToHtml,
+  heading_2: blockParsers.HeaderBlockToHtml,
+  heading_3: blockParsers.HeaderBlockToHtml,
   sub_header: blockParsers.SubHeaderBlockParser,
   sub_sub_header: blockParsers.SubSubHeaderBlockParser,
   to_do: blockParsers.ToDoBlockToHtml,
@@ -19,6 +21,7 @@ const fromBlockToHtmlConverter: Record<string, ToHtmlClass> = {
   equation: blockParsers.EquationBlockToHtml,
   quote: blockParsers.QuoteBlockToHtml,
   divider: blockParsers.DividerBlockToHtml,
+  bulleted_list_item: blockParsers.ListBlockToHtml,
   list: blockParsers.ListBlockToHtml,
   video: blockParsers.YouTubeVideoBlockToHtml,
   image: blockParsers.ImageBlockToHtml,

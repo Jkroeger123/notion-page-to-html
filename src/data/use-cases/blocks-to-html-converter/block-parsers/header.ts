@@ -11,7 +11,7 @@ export class HeaderBlockToHtml implements ToHtml {
   }
 
   async convert(): Promise<string> {
-    const style = new FormatToStyle(this._block.format).toStyle();
-    return Promise.resolve(`<h1${style}>${await blockToInnerHtml(this._block)}</h1>`);
+    //const style = new FormatToStyle(this._block.format).toStyle();
+    return Promise.resolve(`<h1>${await blockToInnerHtml(this._block)}</h1>`);
   }
 }

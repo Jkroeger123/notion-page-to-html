@@ -16,11 +16,12 @@ export class Decorator {
   }
 
   async _decorateByDecorableText(decorableText: DecorableText): Promise<string> {
-    let html = decorableText.text;
-    for (const decoration of decorableText.decorations) {
+    let html = decorableText.text.content;
+
+    /*for (const decoration of decorableText.decorations) {
       const decorator = new DecoratorDispatcher().dispatch(html, decoration);
       html = await decorator.convert();
-    }
+    }*/
 
     return Promise.resolve(html);
   }

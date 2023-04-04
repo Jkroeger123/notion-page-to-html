@@ -1,6 +1,9 @@
-import { Decoration } from './decoration';
-
 export type DecorableText = {
-  text: string;
-  decorations: Decoration[];
+  text: { content: string; link: null };
+  bold: boolean;
+  italic: boolean;
+  strikethrough: boolean;
+  underline: boolean;
+  code: boolean;
+  color: string;
 };

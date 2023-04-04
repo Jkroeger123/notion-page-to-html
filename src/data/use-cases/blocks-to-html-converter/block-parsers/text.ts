@@ -1,7 +1,6 @@
 import { blockToInnerHtml } from '../../../helpers/block-to-inner-html';
 import { Block } from '../../../protocols/blocks';
 import { ToHtml } from '../../../../domain/use-cases/to-html';
-import { FormatToStyle } from '../../format-to-style';
 import { indentBlocksToHtml } from '../../../helpers/blocks-to-html';
 
 export class TextBlockToHtml implements ToHtml {
@@ -12,9 +11,8 @@ export class TextBlockToHtml implements ToHtml {
   }
 
   async convert(): Promise<string> {
-    const style = new FormatToStyle(this._block.format).toStyle();
-    const childrenHtml = await indentBlocksToHtml(this._block.children);
+    const childrenHtml = await indentBlocksToHtml(this._block.paragraph.children);
 
-    return Promise.resolve(`<p${style}>${await blockToInnerHtml(this._block)}${childrenHtml}</p>`);
+    return Promise.resolve(`<p>${await blockToInnerHtml(this._block)}${childrenHtml}</p>`);
   }
 }
