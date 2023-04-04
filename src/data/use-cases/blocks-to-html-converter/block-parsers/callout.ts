@@ -13,7 +13,7 @@ export class CalloutBlockToHtml implements ToHtml {
 
   async convert(): Promise<string> {
     const style = new FormatToStyle(this._block.format).toStyle();
-    const iconHtml = await new IconToHtml(this._block.properties.page_icon, this._block.id).toHtml();
+    const iconHtml = await new IconToHtml(this._block.callout.icon.emoji, this._block.id).toHtml();
 
     return Promise.resolve(`
 <div class="callout"${style}>
@@ -38,7 +38,7 @@ class IconToHtml {
     if (!this._icon.startsWith('http')) return `<div class="callout-emoji">${this._icon}</div>`;
 
     const url = `https://www.notion.so/image/${encodeURIComponent(this._icon)}?table=block&id=${this._id}`;
-    const imageSource = await Base64Converter.convert(url);
+    const imageSource = url;
     const caption = 'callout icon';
     return `<div class="callout-image"><img src="${imageSource}" alt="${caption}"></div>`;
   }

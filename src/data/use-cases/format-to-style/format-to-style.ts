@@ -9,7 +9,7 @@ export class FormatToStyle {
   }
 
   toStyle(): string {
-    const styleProps = [];
+    /*const styleProps = [];
 
     const blockColor = this._format.block_color;
     if (blockColor) styleProps.push(new BlockColorToProp(blockColor).toStyle());
@@ -17,8 +17,8 @@ export class FormatToStyle {
     const blockWidth = this._format.block_width;
     if (blockWidth) styleProps.push(new BlockWidthToProp(blockWidth).toStyle());
 
-    if (styleProps.length === 0) return '';
-    return ` style="${styleProps.join('')}"`;
+    if (styleProps.length === 0) return '';*/
+    return ` style=""`;
   }
 }
 

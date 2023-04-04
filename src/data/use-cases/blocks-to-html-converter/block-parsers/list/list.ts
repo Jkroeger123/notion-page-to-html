@@ -14,7 +14,7 @@ export class ListBlockToHtml implements ToHtml {
   }
 
   async convert(): Promise<string> {
-    const tag: string = fromTypeToTag[this._block.children[0].type] || fromTypeToTag.bulleted_list;
+    const tag: string = fromTypeToTag[this._block.children[0].type] || fromTypeToTag.bulleted_list_item;
     //const style = new FormatToStyle(this._block.format).toStyle();
 
     //const childrenHtml = await indentBlocksToHtml(this._block.children);
@@ -24,7 +24,7 @@ export class ListBlockToHtml implements ToHtml {
   }
 
   private async _itemsHtml(): Promise<string> {
-    const items = await Promise.all(this._block.children.map(async (c) => new ListItemToHtml(c).convert()));
+    const items = await Promise.all(this._block.children.map(async (c: Block) => new ListItemToHtml(c).convert()));
     return Promise.resolve(items.join('\n'));
   }
 }

@@ -27,6 +27,6 @@ export class ToDoBlockToHtml implements ToHtml {
   }
 
   private _isChecked(): boolean {
-    return !!this._block.properties.checked;
+    return !!this._block.to_do.checked;
   }
 }

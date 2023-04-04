@@ -13,7 +13,7 @@ export class ImageBlockToHtml implements ToHtml {
   async convert(): Promise<string> {
     if (!this._rawSrc) return '';
 
-    const imageSource = await Base64Converter.convert(this._rawSrc);
+    const imageSource = this._rawSrc;
     const caption = this._caption;
     //const style = new FormatToStyle(this._block.format).toStyle();
 
@@ -33,6 +33,10 @@ ${caption !== '' ? `<figcaption>${caption}</figcaption>` : ''}
   }
 
   private get _caption() {
-    return this._block.properties.caption || '';
+    const caption = this._block.image.caption;
+
+    if (caption.length == 0) return '';
+
+    return caption[0].plain_text;
   }
 }
