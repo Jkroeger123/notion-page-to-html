@@ -4,7 +4,6 @@ import { ListItemToHtml } from './list-item';
 import { FormatToStyle } from '../../../format-to-style';
 import { indentBlocksToHtml } from 'data/helpers/blocks-to-html';
 import { Decorator } from '../decorations/decorator';
-import { replaceLineBreakByBrTag } from 'data/helpers/replace-line-break-to-br-tag';
 
 export class ListBlockToHtml implements ToHtml {
   private readonly _block: Block;
@@ -26,7 +25,7 @@ export class ListBlockToHtml implements ToHtml {
   private async _itemsHtml(): Promise<string> {
     const decorator = new Decorator(this._block[this._block.type].rich_text || ([] as DecorableText[]));
     const decoratedText = await decorator.decorate();
-    return Promise.resolve(replaceLineBreakByBrTag(decoratedText));
+    return Promise.resolve(decoratedText);
   }
 }
 
